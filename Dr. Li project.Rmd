@@ -1,0 +1,655 @@
+---
+title: "R tutorial medicine"
+author: "Aayush Kapri"
+date: "2023-09-12"
+output:
+  html_document: default
+  pdf_document: default
+warning: FALSE
+---
+## 1 **R and RStudio**
+
+### 1.1 **R**
+
+R is a programming language which is highly relevant in medicine and health science due to its robust data analysis and statistical capabilities. Researchers in these fields  can use R to analyze large datasets, conduct statistical modeling, and visualize medical data. It is open-source and has extensive libraries, which make it a powerful tool for advancing medical research and improving healthcare practices.
+
+To install R, go to [cran](https://cran.r-project.org/). And download the version that is appropriate to your device. It is recommended to install the latest version of R. If you already have R installed in your device, you can update your current version by installing the latest version. You do not need to unistall the previous version to update your previous version. 
+
+### 1.2 **RStudio**
+
+RStudio is an integrated development environment (IDE) for the R programming language. RStudio provides a user-friendly and feature-rich interface for working with R, making it easier  to write, debug, and run R code efficiently.
+
+In order to install free version of RStudio, go to [the download page](https://posit.co/download/rstudio-desktop/#download). You need to download the version that is appropriate to your device. 
+
+### 1.3 **RStudio Cloud**
+
+R programming can also to used in a cloud version of RStudio, making users to access R and their work from anywhere with a web browser. Visit [Postit](https://posit.cloud/) and it will have the exact interface as Rstudio where you can write codes and it will be stored in the cloud. This platform facilitates collaboration between researchers by enabling simultaneous workflows.
+
+## 2 **Operators, Variables and Data Types **
+
+### 2.1 **Operators**
+
+Before proceeding further, let us introduce the operator that is most commonly used in R, i.e., '<-'. It is the assignment operator.
+
+```{r}
+# Suppose we have a patient's age and want to store it in a variable.
+patient_age <- 35
+
+# Now, you can use 'patient_age' for medical calculations or analysis.
+# print() is used for printing in R. \n is used to break lines.
+print(paste("The patient's age is:", patient_age, "years old"))
+
+```
+Operators in R should be very familiar to researchers. 
+
+``` {r}
+# Example 1: Addition (+)
+dose_1 <- 100
+dose_2 <- 50
+total_dose <- dose_1 + dose_2
+print(paste("Total dose:", total_dose, "mg"))
+
+# Example 2: Subtraction (-)
+pre_treatment_bp <- 120
+post_treatment_bp <- 110
+delta_bp <- pre_treatment_bp - post_treatment_bp
+print(paste("Change in blood pressure:", delta_bp, "mmHg"))
+
+# Example 3: Multiplication (*)
+weight_kg <- 70
+height_m <- 1.75
+bmi <- weight_kg / (height_m * height_m)
+print(paste("BMI:", bmi))
+
+# Example 4: Division (/)
+total_beats <- 4500
+time_in_minutes <- 60
+heart_rate <- total_beats / time_in_minutes
+print(paste("Heart rate:", heart_rate, "beats per minute"))
+
+# Example 5: Exponentiation (^ or **)
+base_dosage <- 10
+weight_kg <- 65
+drug_dosage <- base_dosage * (weight_kg^2)
+print(paste("Drug dosage:", drug_dosage, "mg"))
+
+
+```
+### 2.2 **Variables Types**
+
+Variables in R are named storage containers that hold data or values, allowing you to work with and manipulate information in your R scripts and programs. These variables can represent a wide range of data types, including numeric values, text, logical values, factors, and dates. You can create, assign, and modify variables to perform various data analysis and calculations in R.
+
+
+```{r}
+# Numeric (for representing measurements):
+# Example: Patient's Body Mass Index (BMI)
+bmi_numeric <- 25.5
+bmi_numeric
+
+# Integer (for whole numbers):
+# Example: Patient's Age
+age_integer <- 35L
+print(paste("Age (integer):", age_integer))
+
+
+# Character (for textual data or patient names):
+# Example: Patient's Name
+patient_name_char <- "John Doe"
+patient_name_char
+
+# Logical (for binary data, like whether a patient is a smoker or not):
+# Example: Smoking Status
+smoker_logical <- TRUE  # If the patient is a smoker
+smoker_logical
+
+# Factor (for categorical data like blood types):
+# Example: Blood Type
+blood_type_factor <- factor("A", levels = c("A", "B", "AB", "O"))
+blood_type_factor
+
+
+# Date (for recording dates of medical events):
+# Example: Date of Admission
+admission_date_date <- as.Date("2023-09-14")
+admission_date_date
+
+
+```
+### 2.3 **Data Format**
+In R, there exists a diverse range of data types, including scalars, vectors (both numeric, character, and logical), matrices, data frames, lists, etc. We consider the most important data type to be the data frame, for which we provide a separate section. Examples of other data types are given below. 
+```{r}
+# Vectors (for storing a sequence of data):
+# Example: Heart rate measurements over time.
+heart_rate_vector <- c(72, 75, 80, 76, 82)
+heart_rate_vector
+
+# Matrices (two-dimensional arrays with rows and columns):
+# Example: Blood pressure measurements of patients over time.
+patient_bp_matrix <- matrix(c(120, 130, 115, 122, 135, 118), nrow = 3, ncol = 2)
+patient_bp_matrix
+
+
+# Lists (for storing heterogeneous data types):
+# Example: A list of patient characteristics and test results.
+patient_info_list <- list(
+  Name = "John Doe",
+  Age = 35,
+  Diagnosis = "Hypertension",
+  TestResults = c(120, 75, 160)
+)
+patient_info_list
+
+
+```
+#### 2.3.1 **Data Frame**
+
+Data frames in R are similar to tables of data, akin to spreadsheets in Excel. Unlike matrices, data frames can accommodate columns containing categorical, logical, numerical, and other types of data. When we need to import an external file, often in a tabular format, we typically load it as a data frame in R.  
+
+```{r}
+# Create a data frame for patient information
+patient_data <- data.frame(
+  PatientID = c(1, 2, 3, 4, 5),
+  Name = c("John Doe", "Alice Smith", "Bob Johnson", "Emily Davis", "Michael Wilson"),
+  Age = c(45, 28, 35, 52, 40),
+  Gender = c("Male", "Female", "Male", "Female", "Male"),
+  Diagnosis = c("Hypertension", "Diabetes", "Asthma", "Heart Disease", "Allergies"),
+  BloodPressure = c("120/80", "135/88", "122/78", "140/95", "118/72")
+)
+
+# Display the patient data frame
+print(patient_data)
+
+```
+
+## 4 **Packages and Libraries**
+
+Packages in R are used to extend the functionality of the programming ability of R. Packages allow programmers to perform specialized task such as data analysis, visualization, statistical modeling and more. Popular packages in R include ```dplyr```and ``` ggplot2 ```. In order to install packages, run ```install.packages("ggplot2")``` at the command line. That will have R automatically download the package to your computer. Similarly, you can install other packages. 
+
+### 4.1 **tidyverse, survival and ggplot**
+
+The ```tidyverse``` is a library with collection of R packages designed for data science that share a common philosophy and grammar, making data manipulation and visualization in R more consistent and efficient. It includes popular packages like ```ggplot2```, ```dplyr```, ```tidyr```, ```readr```, and more. 
+
+``` {r}
+# Assuming lung_data is your dataset
+library(tidyverse)
+
+library(survival)
+#data function can display all available data sets in this package
+data(package = "survival")
+# We will use data set "lung
+
+#the sex variable in a dataset is coded as 1 for male and 2 for female, and we want to convert it to "Male" and "Female," we can use the mutate function from dplyr
+lung %>%
+  mutate(sex = ifelse(sex == 1, "Male", "Female")) %>% 
+  head()
+
+
+
+```
+### 4.2 **Pipes**
+
+You may have noticed or notice the operator ```%>%```. It is called the pipe operator. It is from the ```magittr``` package. Pipes are a powerful tool for enhancing the readability and expressiveness of your code. It allows you to write code in a way that flows from left to right, making it easier to understand. As ```%>%``` is a bit tedious to type, there exist shortcuts: shift-ctrl-m on a Mac, shift-ctrl-m on a Windows machine. Here is an example of code with and without pipe:
+
+```{r}
+# Load the necessary library
+library(survival)
+
+# Load datset
+data(cancer, package = "survival")
+
+# Without pipes
+male_data <- subset(cancer, sex == 1)
+mean_age <- mean(male_data$age)
+
+# Display the result
+print(mean_age)
+
+```
+
+```{r}
+# Load the necessary library
+library(survival)
+library(dplyr)
+
+# Load dataset
+data(cancer, package = "survival")
+
+# With pipes
+mean_age <- cancer %>%
+  filter(sex == 1) %>%
+  summarise(mean_age = mean(age)) %>% 
+  pull(mean_age)
+
+
+# Display the result
+print(mean_age)
+
+```
+
+## 5 **Importing data in r**
+In order to work with data in R, it is important to import data from external sources such as your computer. The external data is most commonly a csv file such as Excel workbook. When we import a external data, it is converted into ``` data.frame ```.
+
+```{r}
+# Use read.csv() to import the data
+# <- read.csv("C:/Users/admin/Dropbox/Cooper Project/20230509_transition_matrix/PEMBRO.OS.csv")
+
+# Display the first few rows of the data
+#head(data)
+
+```
+R also allows us to work with pre-loaded data. R comes with several datasets that are preloaded for users to explore and analyze. These datasets are part of the base R installation, and you can access them without accessing your local directory. In fact, the lung dataset we imported above is a pre-loaded dataset. 
+
+
+```{r}
+#Survival in patients with advanced lung cancer from the North Central Cancer Treatment Group. Performance scores rate how well the patient can perform usual daily activities
+library(survival)
+#data function can display all available data sets in this package
+data(package = "survival")
+# We will use data set "lung" as an example
+?data(lung)
+#we can call the data set directly after loading the survival library
+head(lung)
+```
+## 6 **Graphing using R**
+
+```ggplot2``` is a powerful and versatile data visualization package in R that facilitates the creation of a wide range of high-quality plots. With ggplot2, you can produce a diverse array of plots, including scatter plots, bar charts, line graphs, and more, all with a focus on customization. The package encourages a declarative style, where you specify what you want the plot to look like and let ggplot2 handle the details. 
+
+
+```{r, out.width="50%", warning=FALSE}
+library(ggplot2)
+
+library(survival)
+data(cancer, package = "survival")
+lung <- as.data.frame(cancer)
+
+lung <- lung %>%
+  mutate(sex = ifelse(sex == 1, "Male", "Female")) 
+
+# 1. Scatter Plot of Age vs. Weight Loss
+plot <-ggplot(lung, aes(x = age, y = wt.loss, color = factor(sex))) +
+       geom_point() +
+      labs(title = "Scatter Plot of Age vs. Weight Loss by Sex group",
+       x = "Age",
+       y = "Weight Loss",
+       color = "Sex")
+plot
+# 2. Bar Chart of Gender Distribution
+ggplot(lung, aes(x = factor(sex))) +
+  geom_bar() +
+  labs(title = "Gender Distribution",
+       x = "Gender",
+       y = "Count")
+
+# 3. Boxplot of Karnofsky Performance Scores
+ggplot(lung, aes(x = factor(status), y = ph.karno)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Karnofsky Performance Scores",
+       x = "Survival Status",
+       y = "Karnofsky Performance Score")
+
+
+# 4. Histogram of Survival Time
+ggplot(lung, aes(x = time)) +
+  geom_histogram(binwidth = 50, fill = "blue", color = "black") +
+  labs(title = "Histogram of Survival Time",
+       x = "Survival Time",
+       y = "Count")
+# 5. Survival Plot
+
+# Load necessary libraries
+library(survival)
+library(survminer)
+
+# Fit a survival model
+survfit_object <- survfit(Surv(time, status) ~ 1, data = cancer)
+
+# Create survival plot using ggsurvplot
+ggsurvplot(survfit_object, data = cancer, 
+           xlab = "Days", ylab = "Overall survival probability",
+           title = "Kaplan-Meier Survival Curve")
+```
+
+
+## 7 **Data Transformation**
+
+Data transformation is the process of cleaning, organizing, and transforming raw data into a format that is easier to access and analyze. It is also known as data summarizing or data wrangling. Data transformation is important because it ensures that data is of high quality and can be used to produce accurate and valuable insights. Data analysts typically spend the majority of their time on data wrangling, as it is a necessary step before any further analysis can be done. Some useful functions under data wrangling are below. 
+``` {r}
+
+library(ggplot2)
+
+library(survival)
+data(cancer, package = "survival")
+lung <- as.data.frame(cancer)
+
+
+# Selecting a subset of variables
+lung_selected <- lung %>%
+  select(time, status, age, sex)
+
+# Displaying the first few rows of the updated dataset
+head(lung_selected)
+
+# Generating a new variable 'sex_category' based on the 'sex' variable
+lung_mutated <- lung %>%
+  mutate(sex_category = ifelse(sex == 1, "Male", "Female"))
+
+# Displaying the first few rows of the updated dataset
+head(lung_mutated)
+
+
+# Sorting the dataset by age in descending order
+lung_sorted <- lung %>%
+  arrange(desc(age))
+
+# Displaying the first few rows of the sorted dataset
+head(lung_sorted)
+
+# Filtering the dataset to include only females
+lung_females <- lung %>%
+  filter(sex == 2)
+
+# Displaying the first few rows of the filtered dataset
+head(lung_females)
+
+
+# Grouping by sex and calculating mean age and median survival time
+summary_stats <- lung %>%
+  group_by(sex) %>%
+  summarize(
+    MeanAge = mean(age),
+    MedianSurvival = median(time)
+  )
+
+# Displaying the summary statistics
+print(summary_stats)
+
+# Grouping by sex and using slice to keep the first row in each group
+lung_sliced <- lung %>%
+  group_by(sex) %>%
+  slice(1)  # Keep the first row in each group
+
+# Displaying the first few rows of the sliced dataset
+head(lung_sliced)
+```
+
+## 8 **Data Summary**
+
+```{r}
+# Install and load the required packages
+# Load necessary libraries
+library(survival)
+library(dplyr)
+library(summarytools)
+library(stargazer)
+#library(compareGroups)
+
+# Assuming your dataset is named 'lung'
+data(cancer, package = "survival")
+lung <- as.data.frame(cancer)
+
+# Use dfsummary to get a summary of the dataset
+dfSummary(lung)
+
+
+# Use stargazer to get a summary of the dataset
+stargazer(lung, type = "text")
+
+# Use compareGroups to get a significance of the variables in dataset with each other
+#compareGroups(sex ~ ., data = lung, method = 4)
+
+```
+
+## 8 **Functions**
+
+In R, a function is a reusable and self-contained block of code that performs a specific task or computation. Functions take input parameters, perform operations, and return results. They facilitate code organization, modularity, and reusability, allowing users to encapsulate logic and efficiently apply it to different data or scenarios. Functions in R are defined using the function keyword and can be called with specified arguments to execute their tasks.
+```{r}
+# 'cancer' is your lung cancer dataset
+
+# Function to rescale a variable to the interval [0, 1]
+rescale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+
+# Example usage: Rescale the 'age' variable from the lung cancer dataset
+rescaled_age <- rescale01(cancer$age)
+
+# Display the original and rescaled values
+data.frame(original_age = cancer$age, rescaled_age = rescaled_age)
+
+```
+
+## 9 **Hypothesis testing**
+
+
+```{r}
+# Load necessary libraries
+library(survival)
+library(dplyr)
+
+# Assuming your dataset is named 'lung'
+data(cancer, package = "survival")
+lung <- as.data.frame(cancer)
+
+# Display summary statistics
+summary(lung$age)
+summary(lung$time)
+
+# Shapiro-Wilk Normality Test
+# Interpretation: The Shapiro-Wilk test assesses whether the age variable follows a normal distribution. It is useful when checking the normality assumption required for certain statistical tests.
+shapiro_test_result <- shapiro.test(lung$age)
+print(shapiro_test_result)
+
+
+# Kolmogorov-Smirnov Test for Normality
+# Interpretation: The Kolmogorov-Smirnov test checks if the time variable is normally distributed. Useful for assessing normality assumption in non-parametric tests.
+ks_test_result <- ks.test(lung$time, "pnorm")
+print(ks_test_result)
+
+
+
+# Q-Q Plot for Age
+# Interpretation: The Q-Q plot visually assesses whether the distribution of age follows a normal distribution. If the points closely follow the diagonal line, it suggests that the age variable is approximately normally distributed.
+qqnorm(lung$age)
+qqline(lung$age)
+
+
+# Hypothesis Testing - T-Test
+# Interpretation: The t-test compares the mean age between different sexes. Useful for assessing differences in means between two groups.
+# T-Test
+# H0: There is no difference in mean age between sexes.
+# H1: There is a significant difference in mean age between sexes
+t_test_result <- t.test(age ~ sex, data = lung)
+print(t_test_result)
+
+
+# Hypothesis Testing - Wilcoxon Rank Sum Test
+# Interpretation: The Wilcoxon Rank Sum Test evaluates if the distribution of ages differs between sexes, suitable when assumptions of normality are not met.
+# Wilcoxon Rank Sum Test
+# H0: There is no difference in the distribution of age between sexes.
+# H1: There is a significant difference in the distribution of age between sexes.
+wilcox_test_result <- wilcox.test(age ~ sex, data = lung)
+print(wilcox_test_result)
+
+
+# Chi-squared Test for Independence - Gender vs. Survival Status
+# Interpretation: The Chi-squared test assesses the independence between gender and survival status. It is useful for analyzing associations between two categorical variables, specifically whether gender is associated with survival status.
+# H0: There is no association between gender and survival status.
+# H1: There is a significant association between gender and survival status.
+contingency_table_gender_status <- table(lung$sex, lung$status)
+contingency_table_gender_status
+chi_squared_result_gender_status <- chisq.test(contingency_table_gender_status)
+print(chi_squared_result_gender_status)
+
+
+#The Fisher's Exact Test is a statistical test used to determine if there are nonrandom associations between two categorical variables. It is particularly useful when the sample sizes are small. This test is an exact test, meaning it calculates the exact probability of observing the given distribution of data, given the marginal totals. The test is often applied in situations where the Chi-squared test may not be appropriate due to small sample sizes or when the assumptions of the Chi-squared test are not met.
+
+# Example using Fisher's Exact Test
+# Assuming you have a 2x2 contingency table named 'my_table'
+my_table <- matrix(c(10, 5, 8, 15), nrow = 2)
+rownames(my_table) <- c("Group 1", "Group 2")
+colnames(my_table) <- c("Category A", "Category B")
+
+# Perform Fisher's Exact Test
+fisher_test_result <- fisher.test(my_table)
+print(fisher_test_result)
+
+```
+
+
+## 10 **Regression**
+
+```{r}
+# Remove rows with NA values
+lung_no_na <- na.omit(lung)
+
+
+# Create a correlation matrix for numeric variables
+correlation_matrix <- cor(lung_no_na)
+
+# Display the correlation matrix
+print(correlation_matrix)
+
+
+# Making sex variable binary
+lung_no_na$sex <- ifelse(lung_no_na$sex == 1, 1, 0)
+
+
+# Fit a Linear Regression (OLS) - Predicting Weight loss based on age and sex
+ols_model <- lm(wt.loss ~ age + sex, data = lung_no_na)
+
+# Display the summary of the OLS
+summary(ols_model)
+
+
+# Fit a Generalized Linear Model (GLM) - Predicting weight loss based on age and sex with gaussian error distribution
+glm_model_gau <- glm(wt.loss ~ age + sex, data = lung_no_na, family = gaussian)
+
+# Display the summary of the GLM
+summary(glm_model_gau)
+
+
+# Making censoring status variable binary
+lung_no_na$status <- ifelse(lung_no_na$status == 1, 1, 0)
+
+# Fit a Generalized Linear Model (GLM) - Predicting weight loss based on age and sex with binomial error distribution using logit
+glm_model_bin <- glm(status ~ age + sex, data = lung_no_na, family = binomial(link = "logit"))
+
+# Display the summary of the GLM
+summary(glm_model_bin)
+
+# Calculate 95% confidence intervals for coefficients
+conf_intervals <- confint(glm_model_bin, level = 0.95)
+
+# Interpretation of coefficients and odds ratios for logit
+coef_summary <- summary(glm_model_bin)
+
+# Display coefficients, odds ratios, and 95% confidence intervals
+result <- cbind(
+  Estimate = coef_summary$coefficients[, 1],
+  Odds_Ratio = exp(coef_summary$coefficients[, 1]),
+  Lower_CI = conf_intervals[, 1],
+  Upper_CI = conf_intervals[, 2]
+)
+
+# Print the results
+print(result)
+
+
+
+# Fit a Quadratic Polynomial Regression  - Predicting Weight loss based on age and sex
+poly_model <- lm(wt.loss ~ poly(age, degree = 2) + sex, data=lung_no_na)
+
+# Display the summary of the poly model
+summary(poly_model)
+
+# Create a data frame for plotting
+plot_data <- data.frame(age = lung_no_na$age, wt.loss = lung_no_na$wt.loss, fitted = predict(poly_model))
+
+# Create the scatter plot with a fitted curve using ggplot2
+ggplot(plot_data, aes(x = age, y = wt.loss)) +
+  geom_point(color = "blue", size = 3) +
+  geom_line(aes(y = fitted), color = "red", size = 1.5) +
+  labs(x = "Age", y = "Weight Loss") +
+  ggtitle("Quadratic Polynomial Regression") +
+  theme_minimal()
+
+#load spline package
+library(splines)
+
+# Fit a linear regression model with cubic spline for 'age'
+spline_model <- lm(wt.loss ~ ns(age, df = 5) + sex, data = lung_no_na)
+
+# Display the summary of the spline model
+summary(spline_model)
+
+# Create a data frame for plotting
+# plot_data <- data.frame(age = seq(min(lung_no_na$age), max(lung_no_na$age), length.out = 100))
+# 
+# # Create a data frame for plotting
+# plot_data <- data.frame(age = seq(min(lung_no_na$age), max(lung_no_na$age), length.out = 100))
+# plot_data$fitted_spline <- predict(spline_model, newdata = data.frame(age = plot_data$age))
+# 
+# # Create the spline regression plot using ggplot2
+# ggplot(lung_no_na, aes(x = age, y = wt.loss)) +
+#   geom_point(color = "blue", size = 3) +
+#   geom_line(data = plot_data, aes(x = age, y = fitted_spline), color = "green", size = 1.5) +
+#   labs(x = "Age", y = "Weight Loss") +
+#   ggtitle("Cubic Spline Regression") +
+#   theme_minimal()
+
+
+
+# Assuming 'cut_point' is the cutoff point for the regression discontinuity
+cut_point <- 50
+
+# Create a variable indicating whether the observation is above or below the cutoff
+lung_no_na$above_cutoff <- ifelse(lung_no_na$age >= cut_point, 1, 0)
+
+# Fit a regression discontinuity model
+rd_model <- lm(wt.loss ~ above_cutoff + sex, data = lung_no_na)
+
+#Display the summary
+summary(rd_model)
+
+# Create a data frame for plotting
+plot_data <- data.frame(
+  age = lung_no_na$age,
+  wt.loss = lung_no_na$wt.loss,
+  above_cutoff = lung_no_na$above_cutoff,
+  fitted_values = predict(rd_model)
+)
+
+
+# Create the first ggplot graph
+plot1 <- ggplot(plot_data, aes(x = age, y = fitted_values, color = factor(above_cutoff))) +
+  geom_point(aes(y = wt.loss), size = 3, alpha = 0.5) +
+  geom_smooth(method = 'lm') +
+  labs(x = "Age", y = "Fitted Values") +
+  ggtitle("Above Cutoff") +
+  theme_minimal()
+
+# Create the second ggplot graph
+plot2 <- ggplot(plot_data, aes(x = age, y = wt.loss)) +
+  geom_point(aes(y = wt.loss), size = 3, alpha = 0.5) +
+  geom_smooth(method = 'lm') +
+  labs(x = "Age", y = "Fitted Values") +
+  ggtitle("Below Cutoff") +
+  theme_minimal()
+
+# Arrange the plots side by side
+library(gridExtra)
+grid.arrange(plot1, plot2, ncol = 2)
+
+
+# Load the 'quantreg' package
+# install.packages("quantreg")
+library(quantreg)
+
+# Fit quantile regression model (e.g., median, 0.5 quantile)
+quantile_model <- rq(wt.loss ~ age + sex, data = lung_no_na, tau = 0.5)
+
+# Display the summary of the quantile regression model
+summary(quantile_model)
+
+```
