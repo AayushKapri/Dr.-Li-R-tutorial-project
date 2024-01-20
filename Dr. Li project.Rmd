@@ -3,8 +3,8 @@ title: "R tutorial medicine"
 author: "Aayush Kapri"
 date: "2023-09-12"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 warning: FALSE
 ---
 ## 1 **R and RStudio**
@@ -296,7 +296,7 @@ ggplot(lung, aes(x = time)) +
        y = "Count")
 # 5. Survival Plot
 
-# Load necessary libraries
+# # Load necessary libraries
 library(survival)
 library(survminer)
 
@@ -304,7 +304,7 @@ library(survminer)
 survfit_object <- survfit(Surv(time, status) ~ 1, data = cancer)
 
 # Create survival plot using ggsurvplot
-ggsurvplot(survfit_object, data = cancer, 
+ggsurvplot(survfit_object, data = cancer,
            xlab = "Days", ylab = "Overall survival probability",
            title = "Kaplan-Meier Survival Curve")
 ```
